@@ -1,0 +1,152 @@
+/* ✅ Header - Full Width, Fixed Height */
+.header {
+    /* background: #8a4baf; */
+    color: rgb(246, 247, 243);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 300px;  /* ✅ Reduced thickness */
+    padding: 5px 15px;
+    box-sizing: border-box; /* ✅ Prevents overflow */
+    background-image: url('../assets/pradeep.jpg'); /* Correct path */
+    background-size: cover; /* Cover the full header */
+    background-position: center;
+    background-repeat: no-repeat;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* ✅ Circular Logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 30%;
+    object-fit: cover;
+}
+
+/* ✅ Website Name */
+.site-name {
+    flex-grow: 1; /* ✅ Allows the name to center properly */
+    text-align: center;
+    font-size: 55px;
+    font-weight: bold;
+    
+}
+
+/* ✅ Search Bar */
+.search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar {
+    width: 80%;
+    max-width: 200px; /* ✅ Prevents excessive width */
+    padding: 6px 10px;
+    border: 1px solid rgb(232, 138, 138);
+    border-radius: 15px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+    background-color: #cae94e;
+}
+
+.search-bar:focus {
+    background: rgba(219, 207, 207, 0.8);
+}
+
+/* ✅ Login Button */
+.user-login {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.login-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    background-color: #cae94e;
+    color: #8a4baf;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #f0f0f0;
+}
+
+/* ✅ Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 120px;
+    text-align: center;
+    z-index: 10; /* ✅ Ensures it appears above other elements */
+}
+
+.dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #8a4baf;
+}
+
+.dropdown-menu button:hover {
+    background: #f0f0f0;
+}
+
+/* ✅ Signup/Login Forms */
+.signup-form,
+.login-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+/* ✅ Make Header Responsive */
+@media (max-width: 768px) {
+    .header {
+        flex-wrap: wrap;
+        height: auto; /* ✅ Allows proper alignment on small screens */
+        padding: 10px;
+    }
+
+    .search-container {
+        width: 100%;
+        justify-content: center;
+        margin-top: 5px;
+    }
+
+    .user-login {
+        margin-left: auto;
+    }
+
+    .dropdown-menu {
+        right: 10px; /* ✅ Prevents cutoff on smaller screens */
+    }
+}
