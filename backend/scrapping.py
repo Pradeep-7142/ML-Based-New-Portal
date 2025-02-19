@@ -1,0 +1,92 @@
+
+import requests
+import psycopg2
+import schedule
+import time
+from datetime import datetime, timedelta
+from config import DATABASE_CONFIG
+
+NEWS_API_KEY = "pub_706479c1054a34eb5b6c88e5f19ffc8920f80"
+NEWS_API_URL = "https://newsdata.io/api/1/news"
+
+NEWS_SOURCES = [
+    {"category": "Education"},
+    {"category": "Jobs"},
+    {"category": "Engineering"},
+    {"category": "Medical"},
+    {"category": "Science"},
+    {"category": "Technology"}
+]
+
+def fetch_news():
+    try:
+        conn = psycopg2.connect(**DATABASE_CONFIG)
+        cur = conn.cursor()
+        
+        for source in NEWS_SOURCES:
+            try:
+                params = {
+                    "apikey": NEWS_API_KEY,
+                    "category": source["category"],
+                    "country": "IN",
+                    "language": "en"
+                }
+                response = requests.get(NEWS_API_URL, params=params)
+                
+                if response.status_code != 200:
+                    print(f"Failed to fetch news for category {source['category']}")
+                    continue
+                
+                data = response.json()
+                
+                for article in data.get("results", []):
+                    title = article.get("title", "Unknown Title")
+                    link = article.get("link", "")
+                    content = article.get("content", "Content not available")
+                    source_name = article.get("source_id", "Unknown Source")
+                    
+                    if title and content:
+                        cur.execute("""
+                            INSERT INTO news (website, category, title, link, content)
+                            VALUES (%s, %s, %s, %s, %s)
+                            ON CONFLICT (title) DO NOTHING;
+                        """, (source_name, source["category"], title, link, content))
+            
+            except Exception as e:
+                print(f"Error fetching news for category {source['category']}: {e}")
+        
+        conn.commit()
+        cur.close()
+        conn.close()
+        print("News data updated.")
+    
+    except Exception as e:
+        print(f"Database connection error: {e}")
+
+def delete_old_news():
+    try:
+        conn = psycopg2.connect(**DATABASE_CONFIG)
+        cur = conn.cursor()
+        one_month_ago = datetime.now() - timedelta(days=30)
+        cur.execute("DELETE FROM news WHERE timestamp < %s;", (one_month_ago,))
+        conn.commit()
+        cur.close()
+        conn.close()
+        print("Old news deleted.")
+    
+    except Exception as e:
+        print(f"Error deleting old news: {e}")
+
+def run_scheduler():
+    print("Scheduler started...")
+    schedule.every().day.at("01:38").do(fetch_news)
+    schedule.every().day.at("06:30").do(delete_old_news)
+    
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
+
+def start_scraper():
+    import threading
+    scraper_thread = threading.Thread(target=run_scheduler, daemon=True)
+    scraper_thread.start()

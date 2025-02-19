@@ -1,7 +1,8 @@
-import React from "react";
-import "./Categories.css"; // Keep styles in a separate file
 
-const Categories = () => {
+import React from "react";
+import "./Categories.css"; // No changes to styles
+
+const Categories = ({ onCategorySelect }) => {
     const categories = [
         "Engineering", "Medicine", "Business", "Arts", "Science", "Technology",
         "Law", "Education", "Sports", "Politics", "Finance", "History",
@@ -11,8 +12,13 @@ const Categories = () => {
     return (
         <div className="categories-container">
             <nav className="categories">
+                <button className="category-btn" onClick={() => onCategorySelect("")}>
+                    All
+                </button>
                 {categories.map((category, index) => (
-                    <button key={index} className="category-btn">{category}</button>
+                    <button key={index} className="category-btn" onClick={() => onCategorySelect(category)}>
+                        {category}
+                    </button>
                 ))}
             </nav>
         </div>
@@ -20,3 +26,4 @@ const Categories = () => {
 };
 
 export default Categories;
+

@@ -1,11 +1,15 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import psycopg2
 from database import connect_db
 from werkzeug.security import generate_password_hash, check_password_hash
+import threading
+from scrapping import start_scraper  # Import your scraper function
 
 app = Flask(__name__)
 CORS(app)
+
+# Start scraper in a separate thread
+start_scraper()
 
 # 🔹 User Signup API
 @app.route("/signup", methods=["POST"])
@@ -55,6 +59,32 @@ def login():
         return jsonify({"error": "Invalid credentials"}), 401
     
     return jsonify({"message": "Login successful"}), 200
+
+# 🔹 Fetch News API
+@app.route("/news", methods=["GET"])
+def get_news():
+    category = request.args.get("category")  # Get category from query parameters
+    conn = connect_db()
+    if not conn:
+        return jsonify({"error": "Database connection failed"}), 500
+    
+    cur = conn.cursor()
+
+    if category:
+        cur.execute("SELECT category, title, website, link FROM news WHERE category = %s ORDER BY timestamp DESC LIMIT 20", (category,))
+    else:
+        cur.execute("SELECT category, title, website, link FROM news ORDER BY timestamp DESC LIMIT 20")
+
+    news_data = cur.fetchall()
+    cur.close()
+    conn.close()
+
+    news_list = [
+        {"category": row[0], "title": row[1], "website": row[2], "link": row[3]}
+        for row in news_data
+    ]
+    
+    return jsonify(news_list), 200
 
 if __name__ == "__main__":
     app.run(debug=True)

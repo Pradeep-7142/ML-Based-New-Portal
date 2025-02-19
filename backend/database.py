@@ -29,5 +29,24 @@ def create_users_table():
         cur.close()
         conn.close()
 
+def create_table():
+    conn = connect_db()
+    if conn:
+        cur = conn.cursor()
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS news (
+                id SERIAL PRIMARY KEY,
+                website VARCHAR(255),
+                category VARCHAR(100),
+                title TEXT UNIQUE,
+                link TEXT,
+                content TEXT,
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        """)
+        conn.commit()
+        cur.close()
+        conn.close()
 # Run this once to ensure the table exists
 create_users_table()
+create_table()
