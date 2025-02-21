@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+📢 Student News Hub - Personalized News & Career Insights
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to Student News Hub – your one-stop platform for customized news, job, and internship recommendations tailored specifically for college students! 🚀
 
-## Available Scripts
+🌟 Features
 
-In the project directory, you can run:
+✅ Personalized News Feed – Stay updated with the latest educational news.
+✅ Job & Internship Recommendations – AI-driven suggestions based on student profiles.
+✅ Clustering & Categorization – Intelligent grouping of news for relevance.
+✅ Naïve Bayes Classifier – Smart classification of articles.
+✅ Sentiment Analysis – Understand public opinion on trending topics.
+✅ Spam Detection – Filter out fake or irrelevant news.
 
-### `npm start`
+🛠️ Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Frontend: React.js ⚛️
+Backend: Flask 🐍
+Database: PostgreSQL 🗄️
+Machine Learning: Clustering, Naïve Bayes, Sentiment Analysis 🤖
+News APIs: Aggregated educational news 📡
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+🚀 How It Works?
 
-### `npm test`
+1️⃣ Scrape & Collect – Fetch news from verified sources via APIs.
+2️⃣ Categorize & Cluster – Use ML techniques to group relevant news.
+3️⃣ Analyze & Filter – Sentiment analysis and spam detection.
+4️⃣ Deliver Personalized Feed – Tailored news, job, and internship recommendations.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+📥 Installation & Setup
 
-### `npm run build`
+1️⃣ Clone the repository:
+  git clone https://github.com/your-repo/student-news-hub.git
+  cd student-news-hub
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2️⃣ Install dependencies:
+  pip install -r backend/requirements.txt
+  cd frontend && npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3️⃣ Run the application:
+  cd backend && python app.py
+  cd frontend && npm start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4️⃣ Open http://localhost:3000 in your browser.
 
-### `npm run eject`
+📌 Future Enhancements
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+🔹 Advanced User Profiling – More accurate job & internship suggestions.
+🔹 Improved Spam Detection – Reduce misinformation further.
+🔹 Real-time News Updates – Faster, more dynamic news retrieval.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+🤝 Contribute
+We welcome contributions! Feel free to fork, submit PRs, or report issues. Let's build a better news portal together! 💡
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+📧 Contact
+For any queries or suggestions, reach out at: mrindia555666@gmail.com
+🎯 Stay informed. Stay ahead. Student News Hub – Your Smart News Companion!
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
