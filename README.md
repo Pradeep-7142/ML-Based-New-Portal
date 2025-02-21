@@ -1,4 +1,4 @@
-📢 Student News Hub - Personalized News & Career Insights
+# 📢 Student News Hub - Personalized News & Career Insights
 
 Welcome to Student News Hub – your one-stop platform for customized news, job, and internship recommendations tailored specifically for college students! 🚀
 
