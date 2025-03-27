@@ -29,6 +29,7 @@ def create_users_table():
         cur.close()
         conn.close()
 
+
 def create_table():
     conn = connect_db()
     if conn:
@@ -41,12 +42,14 @@ def create_table():
                 title TEXT UNIQUE,
                 link TEXT,
                 content TEXT,
+                image_url TEXT,  -- Added image_url column
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         """)
         conn.commit()
         cur.close()
         conn.close()
+
 # Run this once to ensure the table exists
 create_users_table()
 create_table()

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import NewsCard from "./NewsCard";
 import Categories from "./Categories"; // Using existing categories only!

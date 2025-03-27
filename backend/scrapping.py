@@ -1,10 +1,13 @@
-
 import requests
 import psycopg2
 import schedule
 import time
 from datetime import datetime, timedelta
 from config import DATABASE_CONFIG
+from classifier import TextScraperClassifier  # Import the class
+from News_class import catg as categories  # Import categories
+scraper = TextScraperClassifier(categories) # instance
+import summarize
 
 NEWS_API_KEY = "pub_706479c1054a34eb5b6c88e5f19ffc8920f80"
 NEWS_API_URL = "https://newsdata.io/api/1/news"
@@ -42,15 +45,18 @@ def fetch_news():
                 for article in data.get("results", []):
                     title = article.get("title", "Unknown Title")
                     link = article.get("link", "")
-                    content = article.get("content", "Content not available")
+                    result=scraper.process_url(link)
+                    summary=summarize.summarize_text(result['filtered_text'])
+                    content = summary['detected_context']
                     source_name = article.get("source_id", "Unknown Source")
+                    image_url = article.get("image_url", None)  # Fetch image URL
                     
                     if title and content:
                         cur.execute("""
-                            INSERT INTO news (website, category, title, link, content)
-                            VALUES (%s, %s, %s, %s, %s)
+                            INSERT INTO news (website, category, title, link, content, image_url)
+                            VALUES (%s, %s, %s, %s, %s, %s)
                             ON CONFLICT (title) DO NOTHING;
-                        """, (source_name, source["category"], title, link, content))
+                        """, (source_name, result['category'], title, link, content, image_url))
             
             except Exception as e:
                 print(f"Error fetching news for category {source['category']}: {e}")
@@ -79,7 +85,7 @@ def delete_old_news():
 
 def run_scheduler():
     print("Scheduler started...")
-    schedule.every().day.at("01:38").do(fetch_news)
+    schedule.every().day.at("22:25").do(fetch_news)
     schedule.every().day.at("06:30").do(delete_old_news)
     
     while True:
@@ -90,3 +96,4 @@ def start_scraper():
     import threading
     scraper_thread = threading.Thread(target=run_scheduler, daemon=True)
     scraper_thread.start()
+

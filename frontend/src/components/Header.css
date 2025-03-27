@@ -9,12 +9,13 @@
     height: 300px;  /* ✅ Reduced thickness */
     padding: 5px 15px;
     box-sizing: border-box; /* ✅ Prevents overflow */
-    background-image: url('../assets/pradeep.jpg'); /* Correct path */
+    
     background-size: cover; /* Cover the full header */
     background-position: center;
     background-repeat: no-repeat;
     font-size: 24px;
     font-weight: bold;
+    background-color: #ab183d;
 }
 
 /* ✅ Circular Logo */
