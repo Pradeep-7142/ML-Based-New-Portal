@@ -4,7 +4,7 @@ import os
 DATABASE_CONFIG = {
     "dbname": "mlDatabase",
     "user": "postgres",
-    "password": "123qweQwe",
+    "password": "1234pradeep",
     "host": "localhost",
     "port": "5432",
 }

@@ -1,23 +1,8 @@
-// import React from "react";
-
-// const NewsCard = ({ category, title, website, link, image_url }) => {
-//     return (
-//         <div className="news-card">
-//             {image_url && <img src={image_url} alt={title} className="news-image" />}
-//             <span className="category">{category} - {website}</span>
-//             <p>{title}</p>
-//             <a href={link} target="_blank" rel="noopener noreferrer">Read More</a>
-//             <button className="summary-button">Summary</button> {/* Added Summary Button */}
-//         </div>
-//     );
-// };
-
-// export default NewsCard;
-
 import React, { useState } from "react";
-import "./SummaryModal.css"; // Make sure to create this CSS file
+import ReactDOM from "react-dom";
+import "./SummaryModal.css"; // Ensure this CSS file exists
 
-const NewsCard = ({ category, title, website, content, link, image_url, summaryData }) => {
+const NewsCard = ({ category, title, website, content, link, image_url }) => {
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
 
   const toggleSummary = () => {
@@ -25,32 +10,36 @@ const NewsCard = ({ category, title, website, content, link, image_url, summaryD
   };
 
   return (
-    <div className="news-card">
-      {image_url && <img src={image_url} alt={title} className="news-image" />}
-      <span className="category">
-        {category} - {website}
-      </span>
-      <p>{title}</p>
-      <a href={link} target="_blank" rel="noopener noreferrer">
-        Read More
-      </a>
-      <button className="summary-button" onClick={toggleSummary}>
-        Summary
-      </button>
+    <>
+      <div className="news-card">
+        {image_url && <img src={image_url} alt={title} className="news-image" />}
+        <span className="category">
+          {category} - {website}
+        </span>
+        <p>{title}</p>
+        <a href={link} target="_blank" rel="noopener noreferrer">
+          Read More
+        </a>
+        <button className="summary-button" onClick={toggleSummary}>
+          Summary
+        </button>
+      </div>
 
-      {/* Summary Modal */}
-      {isSummaryOpen && (
-        <div className="summary-modal">
-          <div className="summary-content">
-            <h2>Summary</h2>
-            <p>{content || "No summary available for this article."}</p>
-            <button onClick={toggleSummary} className="summary-close-btn">
-              Close
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
+      {/* Summary Modal rendered outside */}
+      {isSummaryOpen &&
+        ReactDOM.createPortal(
+          <div className="summary-modal" onClick={toggleSummary}>
+            <div className="summary-content" onClick={(e) => e.stopPropagation()}>
+              <h2>Summary</h2>
+              <p>{content || "No summary available for this article."}</p>
+              <button onClick={toggleSummary} className="summary-close-btn">
+                Close
+              </button>
+            </div>
+          </div>,
+          document.body
+        )}
+    </>
   );
 };
 

@@ -64,30 +64,73 @@ def login():
 
 
 
+# @app.route("/news", methods=["GET"])
+# def get_news():
+#     category = request.args.get("category")  # Get category from query parameters
+#     print(category)
+#     conn = connect_db()
+#     if not conn:
+#         return jsonify({"error": "Database connection failed"}), 500
+    
+#     cur = conn.cursor()
+
+#     if category:
+#         cur.execute("SELECT category, title, website, content, link, image_url FROM news WHERE category = %s ORDER BY timestamp DESC LIMIT 20", (category,))
+#     else:
+#         cur.execute("SELECT category, title, website, content, link, image_url FROM news ORDER BY timestamp DESC LIMIT 20")
+
+#     news_data = cur.fetchall()
+#     cur.close()
+#     conn.close()
+
+#     news_list = [
+#         {"category": row[0], "title": row[1], "website": row[2], "content": row[3], "link": row[4], "image_url": row[5]}  # Added image_url field
+#         for row in news_data
+#     ]
+    
+#     return jsonify(news_list), 200
+
 @app.route("/news", methods=["GET"])
 def get_news():
     category = request.args.get("category")  # Get category from query parameters
     conn = connect_db()
+    
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
     
     cur = conn.cursor()
 
-    if category:
-        cur.execute("SELECT category, title, website, content, link, image_url FROM news WHERE category = %s ORDER BY timestamp DESC LIMIT 20", (category,))
+    # Corrected condition to handle category selection
+    if category and category.strip():  # Check if category is not empty
+        cur.execute(
+            "SELECT category, title, website, content, link, image_url FROM news WHERE category = %s ORDER BY timestamp DESC LIMIT 20",
+            (category,)
+        )
     else:
-        cur.execute("SELECT category, title, website, content, link, image_url FROM news ORDER BY timestamp DESC LIMIT 20")
+        # Fetch all news if category is empty or None
+        cur.execute(
+            "SELECT category, title, website, content, link, image_url FROM news ORDER BY timestamp DESC LIMIT 20"
+        )
 
     news_data = cur.fetchall()
     cur.close()
     conn.close()
 
+    # Prepare the news data to return
     news_list = [
-        {"category": row[0], "title": row[1], "website": row[2], "content": row[3], "link": row[4], "image_url": row[5]}  # Added image_url field
+        {
+            "category": row[0],
+            "title": row[1],
+            "website": row[2],
+            "content": row[3],
+            "link": row[4],
+            "image_url": row[5]
+        }
         for row in news_data
     ]
     
     return jsonify(news_list), 200
+
 
 
 if __name__ == "__main__":

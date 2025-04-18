@@ -85,7 +85,7 @@ def delete_old_news():
 
 def run_scheduler():
     print("Scheduler started...")
-    schedule.every().day.at("22:25").do(fetch_news)
+    schedule.every().day.at("14:20").do(fetch_news)
     schedule.every().day.at("06:30").do(delete_old_news)
     
     while True:
