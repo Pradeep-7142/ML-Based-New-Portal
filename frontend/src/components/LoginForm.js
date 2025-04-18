@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./AuthForm.css"; // ✅ Shared styles for Login & Signup
 
+
 const LoginForm = ({ closeForm }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -32,8 +33,11 @@ const LoginForm = ({ closeForm }) => {
         }
     };
 
+    
+    
     return (
         <div className="modal-overlay">
+            
             <div className="auth-form">
                 <button className="close-btn" onClick={closeForm}>✖</button>
                 <h2>Login</h2>
@@ -60,7 +64,7 @@ const LoginForm = ({ closeForm }) => {
                         required
                     />
 
-                    <button type="submit" className="submit-btn">Login</button>
+                    <button type="submit" className="submit-btn" >Login</button>
                 </form>
             </div>
         </div>
@@ -68,3 +72,4 @@ const LoginForm = ({ closeForm }) => {
 };
 
 export default LoginForm;
+
