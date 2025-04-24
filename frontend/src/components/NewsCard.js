@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import "../styles/SummaryModal.css"; // Ensure this CSS file exists
+import "../styles/SummaryModal.css"; 
+import "../styles/NewsCard.css"
 
 const NewsCard = ({ category, title, ntag, website, content, link, image_url }) => {
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);

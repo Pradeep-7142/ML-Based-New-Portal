@@ -1,0 +1,117 @@
+.news-card {
+    background-color: #f9fdf0;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    margin: 20px auto;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .news-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .news-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .category {
+    display: block;
+    font-weight: bold;
+    color: #2980b9;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .news-card p {
+    font-size: 15px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .news-card a {
+    display: inline-block;
+    color: #2962ff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 8px;
+    transition: color 0.3s ease;
+  }
+  
+  .news-card a:hover {
+    color: #0039cb;
+  }
+  
+  .summary-button {
+    margin-top: 10px;
+    background-color: #2962ff;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .summary-button:hover {
+    background-color: #0039cb;
+  }
+  
+  /* Modal Styles */
+  .summary-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .summary-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 90%;
+    width: 400px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+  
+  .summary-content h2 {
+    margin-bottom: 12px;
+    font-size: 22px;
+    color: #2c3e50;
+  }
+  
+  .summary-content p {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .summary-close-btn {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .summary-close-btn:hover {
+    background-color: #c0392b;
+  }
+  
