@@ -1,26 +1,32 @@
-import React from 'react';
+import React, { useState } from "react";
 import '../styles/dashboard.css';
+import "../styles/JobCard.css";
 
 const JobList = ({ jobs }) => {
+  const [expandedJobId, setExpandedJobId] = useState(null);
+
   if (!jobs || jobs.length === 0) {
     return <p>No job recommendations available. Update your profile and preferences to get recommendations.</p>;
   }
+
+  const toggleDescription = (jobId) => {
+    setExpandedJobId(prevId => (prevId === jobId ? null : jobId));
+  };
 
   return (
     <div className="job-list">
       {jobs.map((job) => (
         <div key={job.id} className="job-card">
-          <h3>{job.title}</h3>
-          <p className="company">{job.company}</p>
-          <p className="description">{job.description}</p>
-          <div className="tags">
-            {job.tags.split(',').map((tag, index) => (
-              <span key={index} className="tag">{tag.trim()}</span>
-            ))}
+          <h2>{job.title}</h2>
+          <h4>{job.company} - {job.location}</h4>
+          <div className="buttonHandle">
+          <button onClick={() => toggleDescription(job.id)}>
+            {expandedJobId === job.id ? "Hide" : "Job Description"}
+          </button>
+          {expandedJobId === job.id && <p>{job.description}</p>}
+
+          <a href={job.url} target="_blank" rel="noopener noreferrer">Apply</a>
           </div>
-          <a href={job.url} target="_blank" rel="noopener noreferrer" className="apply-button">
-            View Job
-          </a>
         </div>
       ))}
     </div>

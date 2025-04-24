@@ -25,6 +25,10 @@ body {
     width: 70%;
     
 }
+.news-left h3{
+    text-align: center;
+    margin-bottom: 15px;
+}
 
 /* Right Side - Same Height as Left Side */
 .news-right {
@@ -38,7 +42,10 @@ body {
     height: calc(3 * 465px + 40px); /* Equal to the height of three sections + gaps */
     overflow: hidden;
 }
-
+.news-right h3{
+    text-align: center;
+    margin-bottom: 15px;
+}
 /* Scrollable Inner Container for Right Section */
 .news-right-container {
     overflow-y: auto;
@@ -126,12 +133,13 @@ body {
 
 /* Footer */
 .footer {
-    background: #3f7ce7;
+    background: #232528;
     color: white;
     text-align: center;
     padding: 15px;
     margin-top: 20px;
     height: 200px;
+    
 }
 
 .footer nav a {
@@ -142,17 +150,17 @@ body {
 
 
 .summary-button {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin-top: auto;
-    background-color: #86b475;
     color: white;
     border: none;
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    background-color: #2f8cef;
+    text-decoration: none;
+    padding: 8px 16px;
+    display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 .summary-button:hover {

@@ -36,7 +36,7 @@ const Dashboard = () => {
         <p><strong>Skills:</strong> {user.skills}</p>
         <p><strong>Interests:</strong> {user.interests}</p>
       </div>
-      
+
       <div className="recommendations-section">
         <h2>Recommended Jobs For You</h2>
         <JobList jobs={jobs} />
@@ -46,3 +46,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+

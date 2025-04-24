@@ -16,13 +16,13 @@ const Login = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    
+
     try {
       const response = await axios.post('http://localhost:5000/login', {
         email: formData.email,
         password: formData.password
       });
-      
+
       if (response.data.success) {
         // Make sure the backend returns the complete user object
         onLogin(response.data.user);

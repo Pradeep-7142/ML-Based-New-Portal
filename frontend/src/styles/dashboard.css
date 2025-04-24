@@ -7,6 +7,7 @@
   .dashboard-container h1 {
     color: #2c3e50;
     margin-bottom: 1rem;
+    text-align: center;
   }
   
   .user-info {
@@ -26,11 +27,12 @@
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid #ecf0f1;
+    text-align: center;
   }
   
   .job-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
   }
   
@@ -90,4 +92,7 @@
   
   .apply-button:hover {
     background-color: #27ae60;
+  }
+  .buttonHandle{
+    display: flex !important;
   }

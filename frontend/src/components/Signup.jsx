@@ -25,10 +25,10 @@ const Signup = ({ onSignup }) => {
     e.preventDefault();
     setError('');
     setSuccess('');
-    
+
     try {
       const response = await axios.post('http://localhost:5000/signup', formData);
-      
+
       if (response.data.success) {
         setSuccess('Account created successfully. Please login.');
         setTimeout(() => {
@@ -105,6 +105,8 @@ const Signup = ({ onSignup }) => {
             name="year_of_study"
             value={formData.year_of_study}
             onChange={handleChange}
+            min="1"
+            max="4"
           />
         </div>
         <div className="form-group">

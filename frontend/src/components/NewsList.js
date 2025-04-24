@@ -62,7 +62,7 @@ const NewsList = () => {
                 <div className="news-right">
                     <h3>Available-Jobs</h3>
                     <div className="news-right-container">
-                        <AllJobs/>
+                        <AllJobs />
                     </div>
                 </div>
             </div>

@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/LandingPage.css';
 import Login from './Login';
 import Signup from './Signup';
-
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -14,7 +13,6 @@ const LandingPage = () => {
   const handleLoginSuccess = (userData) => {
     setShowLogin(false);
     setCurrentUser(userData);
-    // Store user in localStorage to persist across page refreshes
     localStorage.setItem('user', JSON.stringify(userData));
   };
 
@@ -32,8 +30,7 @@ const LandingPage = () => {
     navigate('/dashboard', { state: { user: currentUser } });
   };
 
-  // Check for logged-in user on initial render
-  React.useEffect(() => {
+  useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setCurrentUser(JSON.parse(storedUser));
@@ -45,31 +42,34 @@ const LandingPage = () => {
       <header className="landing-header">
         <h1>Welcome to Our Platform</h1>
         <div className="auth-buttons">
-          {!currentUser ? (
+          {!currentUser && (
             <>
               <button onClick={() => setShowLogin(true)} className="btn login-btn">Login</button>
               <button onClick={() => setShowSignup(true)} className="btn signup-btn">Sign Up</button>
             </>
-          ) : (
+          )}
+
+          {currentUser && (
             <>
-              <button onClick={handleDashboard} className="btn dashboard-btn">
-                See Recommended Jobs
-              </button>
+              {/* Only show logout button now */}
               <button onClick={handleLogout} className="btn logout-btn">Logout</button>
             </>
           )}
+
+          {/* Always show dashboard button when user is logged in */}
+          {currentUser && !showLogin && !showSignup && (
+            <button onClick={handleDashboard} className="btn dashboard-btn">
+              See Recommended Jobs
+            </button>
+          )}
         </div>
-        
       </header>
 
       {/* Login Modal */}
       {showLogin && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <button 
-              className="close-button" 
-              onClick={() => setShowLogin(false)}
-            >
+            <button className="close-button" onClick={() => setShowLogin(false)}>
               &times;
             </button>
             <Login onLogin={handleLoginSuccess} />
@@ -81,10 +81,7 @@ const LandingPage = () => {
       {showSignup && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <button 
-              className="close-button" 
-              onClick={() => setShowSignup(false)}
-            >
+            <button className="close-button" onClick={() => setShowSignup(false)}>
               &times;
             </button>
             <Signup onSignup={handleSignupSuccess} />

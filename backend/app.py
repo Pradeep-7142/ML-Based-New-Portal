@@ -17,7 +17,7 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
 # DO NOT REMOVE 
-start_scraper()
+#start_scraper()
 # # with app.app_context():  
 # #     fetch_and_recommend_jobs()
 
@@ -189,14 +189,14 @@ def get_job_recommendations(user_id):
         user_text += f" {pref_data[0]}"
     
     # Get all jobs
-    cur.execute("SELECT id, title, company, description, tags FROM job_listings")
+    cur.execute("SELECT id, title, company, location, description, tags, url FROM job_listings")
     jobs = cur.fetchall()
     
     if not jobs:
         return []
     
     # Prepare data for TF-IDF
-    job_texts = [f"{job[1]} {job[2]} {job[3]} {job[4]}" for job in jobs]
+    job_texts = [f"{job[1]} {job[2]} {job[4]} {job[5]}" for job in jobs]
     all_texts = [user_text] + job_texts
     
     # Vectorize text
@@ -209,7 +209,7 @@ def get_job_recommendations(user_id):
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     
     # Get top 5 jobs
-    top_indices = [i[0] for i in sim_scores[:5]]
+    top_indices = [i[0] for i in sim_scores[:6]]
     recommended_jobs = [jobs[i] for i in top_indices]
     
     # Format response
@@ -219,8 +219,11 @@ def get_job_recommendations(user_id):
             'id': job[0],
             'title': job[1],
             'company': job[2],
-            'description': job[3],
-            'tags': job[4]
+            "location": job[3],
+            'description': job[4],
+            'tags': job[5],
+            "url": job[6]
+            
         })
     
     cur.close()
