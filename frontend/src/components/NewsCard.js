@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import "./SummaryModal.css"; // Ensure this CSS file exists
+import "../styles/SummaryModal.css"; // Ensure this CSS file exists
 
-const NewsCard = ({ category, title, website, content, link, image_url }) => {
+const NewsCard = ({ category, title, ntag, website, content, link, image_url }) => {
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
 
   const toggleSummary = () => {
@@ -20,6 +20,7 @@ const NewsCard = ({ category, title, website, content, link, image_url }) => {
         <a href={link} target="_blank" rel="noopener noreferrer">
           Read More
         </a>
+        <p>{ntag}</p>
         <button className="summary-button" onClick={toggleSummary}>
           Summary
         </button>

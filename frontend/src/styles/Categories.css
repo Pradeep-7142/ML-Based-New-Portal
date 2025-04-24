@@ -1,0 +1,73 @@
+/* ✅ Categories Container */
+.categories-container {
+    width: 100%;
+    overflow-x: auto; /* ✅ Enables horizontal scrolling */
+    overflow-y: hidden; /* ❌ Prevents vertical scrolling */
+    white-space: nowrap; /* ✅ Prevents items from wrapping */
+    scrollbar-width: thin; /* ✅ For Firefox */
+    scrollbar-color: #ccc transparent;
+    height: 50px;
+}
+
+/* ✅ Scrollbar for Webkit Browsers */
+.categories-container::-webkit-scrollbar {
+    height: 1px; /* ✅ Small height scrollbar */
+}
+
+.categories-container::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 4px;
+}
+
+.categories-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ✅ Categories Ribbon */
+.categories {
+    display: flex;
+    justify-content: flex-start; /* ✅ Aligns items in a row */
+    gap: 10px; /* ✅ Adds spacing between categories */
+    padding: 10px;
+    background-color: rgb(240, 245, 244);
+    border-top: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    overflow-x: auto;
+    overflow-y: hidden; /* ❌ Prevents vertical scrolling */
+    white-space: nowrap;
+    background-color: #524a4a;
+}
+
+/* ✅ Category Buttons */
+.category-btn {
+    flex: 0 0 auto; /* ✅ Prevents buttons from shrinking */
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    border-radius: 15px;
+    color: white;
+}
+
+.category-btn:hover {
+    background-color: #a9ed85;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    .category-btn {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-btn {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+}

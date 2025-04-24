@@ -1,0 +1,17 @@
+.job-card {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: left;
+  }
+  .job-card h2 {
+    margin-top: 0;
+  }
+  .job-card a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  

@@ -1,15 +1,15 @@
 import requests
-import psycopg2
 import schedule
 import time
 from datetime import datetime, timedelta
-from config import DATABASE_CONFIG
+from database import connect_db
 from classifier import TextScraperClassifier  # Import the class
 from News_class import catg as categories  # Import categories
 scraper = TextScraperClassifier(categories) # instance
 import summarize
+from Spam_Detector import spam_detector
 
-NEWS_API_KEY = "pub_706479c1054a34eb5b6c88e5f19ffc8920f80"
+NEWS_API_KEY = "pub_706477834058cf274564c45148f9b306b1b55"
 NEWS_API_URL = "https://newsdata.io/api/1/news"
 
 NEWS_SOURCES = [
@@ -23,7 +23,7 @@ NEWS_SOURCES = [
 
 def fetch_news():
     try:
-        conn = psycopg2.connect(**DATABASE_CONFIG)
+        conn = connect_db()
         cur = conn.cursor()
         
         for source in NEWS_SOURCES:
@@ -47,16 +47,17 @@ def fetch_news():
                     link = article.get("link", "")
                     result=scraper.process_url(link)
                     summary=summarize.summarize_text(result['filtered_text'])
+                    ntag=spam_detector(result['filtered_text'])
                     content = summary['detected_context']
                     source_name = article.get("source_id", "Unknown Source")
                     image_url = article.get("image_url", None)  # Fetch image URL
                     
                     if title and content:
                         cur.execute("""
-                            INSERT INTO news (website, category, title, link, content, image_url)
-                            VALUES (%s, %s, %s, %s, %s, %s)
+                            INSERT INTO news (website, category, title, ntag, link, content, image_url)
+                            VALUES (%s, %s, %s, %s, %s, %s, %s)
                             ON CONFLICT (title) DO NOTHING;
-                        """, (source_name, result['category'], title, link, content, image_url))
+                        """, (source_name, result['category'], title, ntag, link, content, image_url))
             
             except Exception as e:
                 print(f"Error fetching news for category {source['category']}: {e}")
@@ -71,7 +72,7 @@ def fetch_news():
 
 def delete_old_news():
     try:
-        conn = psycopg2.connect(**DATABASE_CONFIG)
+        conn = connect_db()
         cur = conn.cursor()
         one_month_ago = datetime.now() - timedelta(days=30)
         cur.execute("DELETE FROM news WHERE timestamp < %s;", (one_month_ago,))
@@ -85,7 +86,7 @@ def delete_old_news():
 
 def run_scheduler():
     print("Scheduler started...")
-    schedule.every().day.at("14:20").do(fetch_news)
+    schedule.every().day.at("01:23").do(fetch_news)
     schedule.every().day.at("06:30").do(delete_old_news)
     
     while True:

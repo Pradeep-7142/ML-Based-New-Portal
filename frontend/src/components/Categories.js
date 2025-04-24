@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Categories.css";
+import "../styles/Categories.css";
 
 const Categories = ({ onCategorySelect }) => {
     const categories = [

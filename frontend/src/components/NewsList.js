@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NewsCard from "./NewsCard";
 import Categories from "./Categories"; // Using existing categories only!
+import AllJobs from "./AllJobs";
 
 const NewsList = () => {
     const [news, setNews] = useState([]);
@@ -59,11 +60,9 @@ const NewsList = () => {
                 </div>
 
                 <div className="news-right">
-                    <h3>Featured News</h3>
+                    <h3>Available-Jobs</h3>
                     <div className="news-right-container">
-                        {filteredNews.map((item, index) => (
-                            <NewsCard key={index} {...item} />
-                        ))}
+                        <AllJobs/>
                     </div>
                 </div>
             </div>
