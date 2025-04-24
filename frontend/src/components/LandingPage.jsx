@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/LandingPage.css';
 import Login from './Login';
 import Signup from './Signup';
+import logoImage from '../assets/education.jpg';
+import userImage from '../assets/user.avif';
+
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -40,32 +43,32 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <header className="landing-header">
-        <h1>Welcome to Our Platform</h1>
-        <div className="auth-buttons">
+        <div className="left-section">
+        <img src={logoImage} alt="Logo" className="logo-image" />
+
+        </div>
+
+        <div className="center-section">
+          <h1 className="website-title">Our Platform</h1>
+        </div>
+
+        <div className="right-section">
+          <img src={userImage} alt="User" className="user-image" />
           {!currentUser && (
             <>
-              <button onClick={() => setShowLogin(true)} className="btn login-btn">Login</button>
-              <button onClick={() => setShowSignup(true)} className="btn signup-btn">Sign Up</button>
+              <button onClick={() => setShowLogin(true)} className="btn">Login</button>
+              <button onClick={() => setShowSignup(true)} className="btn">Sign Up</button>
             </>
           )}
-
           {currentUser && (
             <>
-              {/* Only show logout button now */}
-              <button onClick={handleLogout} className="btn logout-btn">Logout</button>
+              <button onClick={handleLogout} className="btn">Logout</button>
+              <button onClick={handleDashboard} className="btn">See Recommended Jobs</button>
             </>
-          )}
-
-          {/* Always show dashboard button when user is logged in */}
-          {currentUser && !showLogin && !showSignup && (
-            <button onClick={handleDashboard} className="btn dashboard-btn">
-              See Recommended Jobs
-            </button>
           )}
         </div>
       </header>
 
-      {/* Login Modal */}
       {showLogin && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -77,7 +80,6 @@ const LandingPage = () => {
         </div>
       )}
 
-      {/* Signup Modal */}
       {showSignup && (
         <div className="modal-overlay">
           <div className="modal-content">
