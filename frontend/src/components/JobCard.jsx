@@ -6,6 +6,7 @@ const JobCard = ({ job }) => {
 
   return (
     <div className="job-card">
+      <li>Active From- {new Date(job.tags).toDateString()}</li>
       <h2>{job.title}</h2>
       <h4>{job.company} - {job.location}</h4>
       <div className="buttonHandle">

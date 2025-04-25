@@ -13,6 +13,7 @@ const NewsCard = ({ category, title, ntag, website, content, link, image_url }) 
   return (
     <>
       <div className="news-card">
+        <li>Tagged As- {ntag}</li>
         {image_url && <img src={image_url} alt={title} className="news-image" />}
         <span className="category">
           {category} - {website}
@@ -21,7 +22,7 @@ const NewsCard = ({ category, title, ntag, website, content, link, image_url }) 
         <a href={link} target="_blank" rel="noopener noreferrer">
           Read More
         </a>
-        <p>{ntag}</p>
+        
         <button className="summary-button" onClick={toggleSummary}>
           Summary
         </button>

@@ -1,4 +1,4 @@
-from flask import  jsonify
+from flask import jsonify
 import requests
 import psycopg2
 import time  
@@ -34,7 +34,8 @@ def fetch_and_recommend_jobs():
             company = job.get("employer_name", "Not available")
             location = job.get("job_city", "Not available")
             description = job.get("job_description", "Not available")
-            tags = ", ".join(job.get("job_tags", [])) if job.get("job_tags") else "Not available"
+            # ⏰ Use published time instead of tags
+            posted_time = job.get("job_posted_at_datetime_utc", "Not available")
             url = job.get("job_apply_link", "Not available")
 
             # ✅ Check if a job with the same title already exists
@@ -46,7 +47,7 @@ def fetch_and_recommend_jobs():
             cur.execute("""
                 INSERT INTO job_listings (title, company, location, description, tags, url)
                 VALUES (%s, %s, %s, %s, %s, %s)
-            """, (title, company, location, description, tags, url))
+            """, (title, company, location, description, posted_time, url))
 
         conn.commit()
         cur.close()
@@ -76,5 +77,3 @@ def fetch_and_recommend_jobs():
         data = fetch_jobs_in_india(field)
         insert_jobs_to_db(data)
         time.sleep(2)  # 🕒 Sleep for 2 seconds to avoid API rate limits
-
-    

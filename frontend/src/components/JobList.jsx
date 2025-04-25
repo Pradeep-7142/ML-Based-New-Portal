@@ -17,6 +17,7 @@ const JobList = ({ jobs }) => {
     <div className="job-list">
       {jobs.map((job) => (
         <div key={job.id} className="job-card">
+          <li>Active From- {new Date(job.tags).toDateString()}</li>
           <h2>{job.title}</h2>
           <h4>{job.company} - {job.location}</h4>
           <div className="buttonHandle">

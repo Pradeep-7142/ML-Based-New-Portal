@@ -65,7 +65,7 @@ def create_job_table():
             company VARCHAR(100),
             location VARCHAR(100),
             description TEXT,
-            tags VARCHAR(200),
+            tags TIMESTAMP,
             url VARCHAR(300)
         );
         """)

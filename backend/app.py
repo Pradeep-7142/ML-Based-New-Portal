@@ -17,9 +17,9 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
 # DO NOT REMOVE 
-#start_scraper()
-# # with app.app_context():  
-# #     fetch_and_recommend_jobs()
+start_scraper()
+# with app.app_context():  
+#     fetch_and_recommend_jobs()
 
 
 
@@ -111,13 +111,13 @@ def get_news():
     
     if category and category.strip():  
         cur.execute(
-            "SELECT category, title, ntag, website, content, link, image_url FROM news WHERE category = %s ORDER BY timestamp DESC LIMIT 20",
+            "SELECT category, title, ntag, website, content, link, image_url FROM news WHERE category = %s ORDER BY timestamp DESC LIMIT 100",
             (category,)
         )
     else:
         
         cur.execute(
-            "SELECT category, title, ntag, website, content, link, image_url FROM news ORDER BY timestamp DESC LIMIT 20"
+            "SELECT category, title, ntag, website, content, link, image_url FROM news ORDER BY timestamp DESC LIMIT 100"
         )
 
     news_data = cur.fetchall()
@@ -147,7 +147,7 @@ def get_all_jobs():
     cur = conn.cursor()
     cur.execute("""
         SELECT id, title, company, location, description, tags, url 
-        FROM job_listings
+        FROM job_listings ORDER BY tags ASC
     """)
     all_jobs = cur.fetchall()
     cur.close()
@@ -189,14 +189,14 @@ def get_job_recommendations(user_id):
         user_text += f" {pref_data[0]}"
     
     # Get all jobs
-    cur.execute("SELECT id, title, company, location, description, tags, url FROM job_listings")
+    cur.execute("SELECT id, title, company, location, description, tags, url FROM job_listings ORDER BY tags ASC")
     jobs = cur.fetchall()
     
     if not jobs:
         return []
     
     # Prepare data for TF-IDF
-    job_texts = [f"{job[1]} {job[2]} {job[4]} {job[5]}" for job in jobs]
+    job_texts = [f"{job[1]} {job[2]} {job[4]}" for job in jobs]
     all_texts = [user_text] + job_texts
     
     # Vectorize text
