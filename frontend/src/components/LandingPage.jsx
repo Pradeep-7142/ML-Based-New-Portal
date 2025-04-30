@@ -49,7 +49,7 @@ const LandingPage = () => {
         </div>
 
         <div className="center-section">
-          <h1 className="website-title">Our Platform</h1>
+          <h1 className="website-title">InfoSphere</h1>
         </div>
 
         <div className="right-section">

@@ -21,12 +21,16 @@ const JobList = ({ jobs }) => {
           <h2>{job.title}</h2>
           <h4>{job.company} - {job.location}</h4>
           <div className="buttonHandle">
-          <button onClick={() => toggleDescription(job.id)}>
-            {expandedJobId === job.id ? "Hide" : "Job Description"}
-          </button>
-          {expandedJobId === job.id && <p>{job.description}</p>}
+            <button onClick={() => toggleDescription(job.id)}>
+              {expandedJobId === job.id ? "Hide" : "Job Description"}
+            </button>
+            {expandedJobId === job.id && (
+              <div className="description-box">
+                <p>{job.description}</p>
+              </div>
+            )}
 
-          <a href={job.url} target="_blank" rel="noopener noreferrer">Apply</a>
+            <a href={job.url} target="_blank" rel="noopener noreferrer">Apply</a>
           </div>
         </div>
       ))}

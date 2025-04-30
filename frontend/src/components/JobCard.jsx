@@ -13,7 +13,12 @@ const JobCard = ({ job }) => {
         <button onClick={() => setShowDescription(!showDescription)}>
           {showDescription ? "Hide" : "Job Description"}
         </button>
-        {showDescription && <p>{job.description}</p>}
+        {showDescription && (
+          <div className="description-box">
+            <p>{job.description}</p>
+          </div>
+        )}
+
 
         <a href={job.url} target="_blank" rel="noopener noreferrer">Apply</a>
       </div>

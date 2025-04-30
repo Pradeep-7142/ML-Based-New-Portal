@@ -9,7 +9,7 @@ scraper = TextScraperClassifier(categories) # instance
 import summarize
 from Spam_Detector import spam_detector
 
-NEWS_API_KEY = "pub_706477834058cf274564c45148f9b306b1b55"
+NEWS_API_KEY = "pub_706474b0b22193d603ca0a32f84a75848092d"
 NEWS_API_URL = "https://newsdata.io/api/1/news"
 
 NEWS_SOURCES = [
@@ -86,7 +86,7 @@ def delete_old_news():
 
 def run_scheduler():
     print("Scheduler started...")
-    schedule.every().day.at("15:24").do(fetch_news)
+    schedule.every().day.at("16:40").do(fetch_news)
     schedule.every().day.at("06:30").do(delete_old_news)
     
     while True:

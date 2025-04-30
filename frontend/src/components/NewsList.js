@@ -36,7 +36,7 @@ const NewsList = () => {
                             <div class="marquee-content">Trending News</div>
                         </div>
                         <div className="news-container">
-                            {filteredNews.slice(0, 20).map((item, index) => (
+                            {filteredNews.slice(0, 12).map((item, index) => (
                                 <NewsCard key={index} {...item} />
                             ))}
                         </div>
@@ -46,7 +46,7 @@ const NewsList = () => {
                             <div class="marquee-content">Weekly News</div>
                         </div>
                         <div className="news-container">
-                            {filteredNews.slice(20, 52).map((item, index) => (
+                            {filteredNews.slice(12, 24).map((item, index) => (
                                 <NewsCard key={index} {...item} />
                             ))}
                         </div>
@@ -57,7 +57,7 @@ const NewsList = () => {
                             <div class="marquee-content">Monthly News</div>
                         </div>
                         <div className="news-container">
-                            {filteredNews.slice(52, 100).map((item, index) => (
+                            {filteredNews.slice(24, 40).map((item, index) => (
                                 <NewsCard key={index} {...item} />
                             ))}
                         </div>
